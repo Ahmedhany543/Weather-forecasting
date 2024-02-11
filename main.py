@@ -1,5 +1,5 @@
 import streamlit as st
-# import plotly.express as px
+import plotly.express as px
 from backend import get_data
 
 # Title, text input, slider, select box, and subheader
@@ -14,11 +14,11 @@ if place:
     try:
         data = get_data(place, days)
 
-        # if option == "Temperature":
-        #     temperatures = [d['main']['temp'] for d in data]
-        #     dates = [d['dt_txt'] for d in data]
-        #     figure = px.line(x=dates, y=temperatures,line_shape='spline', labels={"x": "Date", "y": "Temperature (C)"})
-        #     st.plotly_chart(figure)
+        if option == "Temperature":
+            temperatures = [d['main']['temp'] for d in data]
+            dates = [d['dt_txt'] for d in data]
+            figure = px.line(x=dates, y=temperatures,line_shape='spline', labels={"x": "Date", "y": "Temperature (C)"})
+            st.plotly_chart(figure)
         if option == "Sky":
             sky_conditions = [d['weather'][0]['main'] for d in data]
             images = {'Clear': 'images/clear.png', 'Clouds': 'images/cloud.png', 'Rain': 'images/rain.png',
